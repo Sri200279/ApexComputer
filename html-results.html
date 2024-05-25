@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        .main{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+        p{
+            width: 100px;
+            height: 50px;
+            color:white;
+            background-color: azure;
+            font-size: 24px;
+        }
+        .rescont{
+        background:black;
+        color:white;
+        width:100vw;
+        height:100vh;
+        position:absolute;
+        left:0;
+        top:0;
+        display: none;
+        }
+
+
+    .hbt:hover{
+    filter:hue-rotate(190deg) drop-shadow(5px 5px 20px white);
+    filter:drop-shadow(5px 5px 5px linear-gradient(45deg,red,green));
+}
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <button id="results" class="hbt" style="background-color: #6223d6;color: aliceblue;border-radius: 6px;">Show Results</button>
+        <div class="rescont">
+            <h1>EXAM RESULTS year 2023-24</h1>
+             <table id="table" border="1"></table>
+             <button id="resbtn" class="hbt">Back</button>
+         </div>
+    </div>
+
+    <script>
+        var btn1=document.getElementById("results");
+        var btn2=document.getElementById("resbtn");
+        var rescont=document.querySelector(".rescont");
+        var data4=[];
+        btn1.addEventListener("click",()=>{
+        rescont.style.display="block";
+        const userData=localStorage.getItem("user");
+        const userData1=localStorage.getItem("user1");
+        const userData2=localStorage.getItem("user2");
+        if(userData){
+            var data1=JSON.parse(userData);
+            var data2=JSON.parse(userData1);
+            var data3=JSON.parse(userData2);
+            data4=[...data1,...data2,...data3];
+            console.log(data4);
+            data4.sort((a,b)=>{return b.Score-a.Score});
+        }
+        else{
+            alert("data not found");
+        }
+        var len=data4.length;
+        /*console.log(len);
+        for(var i=0;i<len;i++)
+        {
+            for(var j=1;j<6;j++)
+            {
+                var p1=document.createElement("p");
+                rescont.appendChild(p1);
+                p1.setAttribute("id","a"+i.toString()+j.toString());
+                p1.style.backgroundColor="green";
+            var enno=document.getElementById("a01");
+            var name1=document.getElementById("a02");
+            var score=document.getElementById("a3");
+            var date=document.getElementById("a4");
+            var sub=document.getElementById("a5");
+            document.write("<br><br>"); 
+        }
+    }*/
+    var html="";
+    var cup="";
+    html=`<th>EnrollNo</th><th>Name</th><th>Score</th><th>Date of Exam</th><th>Subject</th>`;
+        data4.forEach((item)=>{
+                console.log(item);
+                if(item.result=="Pass")
+                cup="green";
+                else
+                cup="red";
+                html+=`<tr><td>${item.Enrollment_no}</td><td>${item.name}</td><td>${item.Score}</td><td>${item.doe}</td><td>${item.subject}</td><td bgColor=${cup}>${item.result}</td></tr>`;
+})
+                table.innerHTML=html;
+})
+btn2.addEventListener("click",()=>{
+    rescont.style.display="none";
+})
+
+    </script>
+</body>
+</html>
