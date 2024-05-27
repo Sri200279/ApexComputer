@@ -492,7 +492,11 @@ localStorage.setItem("user2",JSON.stringify(x));
 
 btn1.addEventListener("click",()=>{
     rescont.style.display="block";
-    const userData=localStorage.getItem("user2");
+    detailD.style.display="none";
+    cont.style.display="none";
+    ec.style.display="none";
+    examE.style.display="none";
+      const userData=localStorage.getItem("user2");
         if(userData){
             var data1=JSON.parse(userData);
             console.log(data1);
@@ -535,6 +539,10 @@ table.innerHTML=html;
 })
 btn2.addEventListener("click",()=>{
     rescont.style.display="none";
+    detailD.style.display="flex";
+    cont.style.display="none";
+    ec.style.display="none";
+    examE.style.display="none";
 })
 </script>
 </div>
